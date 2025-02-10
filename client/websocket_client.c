@@ -84,14 +84,14 @@ context_info.timeout_secs = 10000;  // Extend timeout
     }
 }
 
-void sendSocket(int x, int y) {
+void sendSocket(int id, float x, float y) {
     if (!connected) {
         printf("WebSocket not connected. Cannot send data.\n");
         return;
     }
 
     char message[256];
-    snprintf(message, sizeof(message), "{\"x\": %d, \"y\": %d}", x, y);
+    snprintf(message, sizeof(message), "{\"id\": %d, \"x\": %f, \"y\": %f}", id, x, y);
 
     unsigned char buf[LWS_PRE + 256];
     memset(buf, 0, sizeof(buf));
