@@ -7,7 +7,7 @@
 #include <string.h>
 
 float timeStep = 0.01f;   // simulation time step
-float G = 10.0f;          // gravitational constant
+float G = 100.0f;          // gravitational constant
 
 /*
    Returns a pointer to a dynamically allocated array of 2 floats,
@@ -137,7 +137,7 @@ int main(int argc, char *argv[]) {
 
             // Send updated position via WebSocket.
             sendSocket(i, position[i][0], position[i][1]);
-            usleep(10000);
+            usleep(10);
         }
     }
 

@@ -21,4 +21,4 @@ int main() {
     return 0;
 }
 
-// gcc main.c websocket_client.c -o client -lwebsockets
+// gcc main.c websocket_client.c -o client -lwebsockets -lm

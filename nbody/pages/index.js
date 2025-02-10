@@ -32,8 +32,11 @@ export default function Home() {
   const yData = messages.map((msg) => msg.y);
 
   return (
-    <div>
-      <h1>Live N-Body Data</h1>
+    <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+      {/* Optional heading overlay */}
+      <h1 style={{ position: "absolute", zIndex: 2, margin: "10px", color: "#333" }}>
+        Live N-Body Data
+      </h1>
       {messages.length > 0 ? (
         <Plot
           data={[
@@ -47,23 +50,27 @@ export default function Home() {
             },
           ]}
           layout={{
-            width: 800,
-            height: 600,
+            autosize: true,
             title: "Live Scatter Plot",
             xaxis: {
               title: "X Values",
-              range: [-200, -200],       // Set fixed x-axis range (adjust as needed)
-              fixedrange: true,     // Disables zooming/panning
+              range: [-500, 500],
+              fixedrange: true,
             },
             yaxis: {
               title: "Y Values",
-              range: [-200,-200],       // Set fixed y-axis range (adjust as needed)
-              fixedrange: true,     // Disables zooming/panning
+              range: [-500, 500],
+              fixedrange: true,
             },
+            margin: { t: 50, l: 50, r: 50, b: 50 }
           }}
+          useResizeHandler={true}
+          style={{ width: "100%", height: "100%" }}
         />
       ) : (
-        <div>No data received yet.</div>
+        <div style={{ textAlign: "center", paddingTop: "20px" }}>
+          No data received yet.
+        </div>
       )}
     </div>
   );
