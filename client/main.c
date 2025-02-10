@@ -11,6 +11,8 @@
 float timeStep = 0.01f;   // simulation time step
 float G = 100.0f;          // gravitational constant
 
+
+
 /*
    Returns a pointer to a dynamically allocated array of 2 floats,
    containing the x and y components of the gravitational force.
