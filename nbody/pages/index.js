@@ -52,12 +52,12 @@ export default function Home() {
             title: "Live Scatter Plot",
             xaxis: {
               title: "X Values",
-              range: [200, 300],       // Set fixed x-axis range (adjust as needed)
+              range: [-200, -200],       // Set fixed x-axis range (adjust as needed)
               fixedrange: true,     // Disables zooming/panning
             },
             yaxis: {
               title: "Y Values",
-              range: [200,300],       // Set fixed y-axis range (adjust as needed)
+              range: [-200,-200],       // Set fixed y-axis range (adjust as needed)
               fixedrange: true,     // Disables zooming/panning
             },
           }}
