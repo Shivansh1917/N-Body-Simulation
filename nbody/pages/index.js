@@ -31,13 +31,45 @@ export default function Home() {
   const xData = messages.map((msg) => msg.x);
   const yData = messages.map((msg) => msg.y);
 
+  // Function to clear messages
+  const handleClearMessages = () => {
+    setMessages([]);
+  };
+
   return (
     <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
       {/* Optional heading overlay */}
-      <h1 style={{ position: "absolute", zIndex: 2, margin: "10px", color: "#333" }}>
+      <h1
+        style={{
+          position: "absolute",
+          zIndex: 2,
+          margin: "10px",
+          color: "#333",
+        }}
+      >
         Live N-Body Data
       </h1>
-      {messages.length > 0 ? (
+      
+      {/* Clear Messages Button */}
+      <button
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          zIndex: 3,
+          padding: "8px 16px",
+          background: "#ff4d4f",
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer",
+        }}
+        onClick={handleClearMessages}
+      >
+        Clean the board
+      </button>
+
+      {messages.length >= 0 ? (
         <Plot
           data={[
             {
@@ -62,7 +94,7 @@ export default function Home() {
               range: [-500, 500],
               fixedrange: true,
             },
-            margin: { t: 50, l: 50, r: 50, b: 50 }
+            margin: { t: 50, l: 50, r: 50, b: 50 },
           }}
           useResizeHandler={true}
           style={{ width: "100%", height: "100%" }}

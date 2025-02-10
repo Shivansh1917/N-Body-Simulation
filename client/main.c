@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include<time.h>
+#include <errno.h>
 
 float timeStep = 0.01f;   // simulation time step
 float G = 100.0f;          // gravitational constant
@@ -41,11 +43,18 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
+
+    FILE *fout = fopen("myFile.txt", "a"); // Open file for writing
+    if (!fout) {
+        fprintf(stderr, "Failed to open file for writing: %s\n", strerror(errno));
+        return 1;
+    }
+
     // Get number of bodies and CSV file name from command-line.
     int numBodies = atoi(argv[1]);
     char *filename = argv[2];
 
-    // Allocate arrays for mass, positions and velocities.
+    // Allocate arrays for mass, positions and velociti
     float *mass = malloc(numBodies * sizeof(float));
     float (*position)[2] = malloc(numBodies * sizeof(*position));
     float (*velocity)[2] = malloc(numBodies * sizeof(*velocity));
@@ -118,6 +127,7 @@ int main(int argc, char *argv[]) {
     float dt = timeStep;
     // Main simulation loop.
     while (true) {
+        clock_t begin = clock();
         for (int i = 0; i < numBodies; i++) {
             float fx = 0.0f, fy = 0.0f;
             // Calculate net force on body i from all other bodies.
@@ -137,14 +147,19 @@ int main(int argc, char *argv[]) {
 
             // Send updated position via WebSocket.
             sendSocket(i, position[i][0], position[i][1]);
-            usleep(10);
+            // usleep(10);
         }
+        clock_t end = clock();
+        double time_spent = (double)(end - begin)/CLOCKS_PER_SEC;
+        fprintf(fout, "%f \n", time_spent);
+        fflush(fout);
     }
-
+    
     // Cleanup (never reached in this infinite loop).
     cleanupWebSocket();
     free(mass);
     free(position);
     free(velocity);
+    fclose(fout); 
     return 0;
 }

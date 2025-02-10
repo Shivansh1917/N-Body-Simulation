@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Set the number of bodies
-num_bodies = 5000
+num_bodies = 50000
 
 # Generate random float data for each parameter
 masses = np.random.uniform(1.0, 10.0, num_bodies)           # Mass between 1.0 and 10.0
